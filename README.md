@@ -4,7 +4,6 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/laravel-notification-channels/infobip/master.svg?style=flat-square)](https://travis-ci.org/laravel-notification-channels/infobip)
 [![StyleCI](https://styleci.io/repos/285751703/shield)](https://styleci.io/repos/285751703)
-[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/:sensio_labs_id.svg?style=flat-square)](https://insight.sensiolabs.com/projects/:sensio_labs_id)
 [![Quality Score](https://img.shields.io/scrutinizer/g/laravel-notification-channels/infobip.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/infobip)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/infobip/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/infobip/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/infobip.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/infobip)
@@ -14,9 +13,10 @@ This package makes it easy to send notifications using [Infobip](https://www.inf
 ## Contents
 
 - [Installation](#installation)
-	- [Setting up the Infobip service](#setting-up-the-infobip-service)
+	- [Setting up the Infobip service](#setting-up-your-infobip-account)
 - [Usage](#usage)
-	- [Available Message methods](#available-message-methods)
+	- [On-Demand Notifications](#on-demand-notifications)
+    - [Available Message methods](#available-message-methods)
 - [Changelog](#changelog)
 - [Testing](#testing)
 - [Security](#security)
