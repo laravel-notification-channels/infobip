@@ -38,5 +38,12 @@
     },
     "config": {
         "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "NotificationChannels\\Infobip\\InfobipServiceProvider"
+            ]
+        }
     }
 }
