@@ -13,8 +13,14 @@ use NotificationChannels\Infobip\Exceptions\CouldNotSendNotification;
 
 class Infobip
 {
+    /**
+     * @var InfobipConfig
+     */
     public $config;
 
+    /**
+     * @var InfobipMessage
+     */
     public $message;
 
     /**
@@ -64,7 +70,7 @@ class Infobip
      */
     public function sendSms(InfobipMessage $message, $recipient)
     {
-        $client = new SendSingleTextualSms(new BasicAuthConfiguration($this->config['username'], $this->config['password']));
+        $client = new SendSingleTextualSms(new BasicAuthConfiguration($this->config->config['username'], $this->config->config['password']));
 
         $request = new SMSTextualRequest();
         $request->setFrom($this->getFrom($message));
@@ -83,7 +89,7 @@ class Infobip
      */
     public function sendSmsAdvanced(InfobipSmsAdvancedMessage $message, $recipient)
     {
-        $client = new SendMultipleTextualSmsAdvanced(new BasicAuthConfiguration($this->config['username'], $this->config['password']));
+        $client = new SendMultipleTextualSmsAdvanced(new BasicAuthConfiguration($this->config->config['username'], $this->config->config['password']));
 
         $destination = new Destination();
 
@@ -92,7 +98,7 @@ class Infobip
         $requestMessage = new Message();
         $requestMessage->setFrom($this->getFrom($message));
         $requestMessage->setDestinations([$destination]);
-        $requestMessage->setText('Message body');
+        $requestMessage->setText($message);
         $requestMessage->setNotifyUrl($this->getNotifyUrl($message));
 
         $request = new SMSAdvancedTextualRequest();
@@ -110,7 +116,7 @@ class Infobip
      */
     public function getFrom(InfobipMessage $message)
     {
-        if (! $from = $message->from() ?: $this->config['from']) {
+        if (! $from = $message->from ?: $this->config->config['from']) {
             throw CouldNotSendNotification::missingFrom();
         }
 
@@ -126,7 +132,7 @@ class Infobip
      */
     public function getNotifyUrl(InfobipSmsAdvancedMessage $message)
     {
-        if (! $notifyUrl = $message->notifyUrl() ?: $this->config['notify_url']) {
+        if (! $notifyUrl = $message->notifyUrl ?: $this->config->config['notify_url']) {
             throw CouldNotSendNotification::missingNotifyUrl();
         }
 

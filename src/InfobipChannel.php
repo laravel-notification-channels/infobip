@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Infobip;
 
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Infobip\Events\NotificationFailed;
 use NotificationChannels\Infobip\Events\NotificationSent;
@@ -9,15 +10,25 @@ use NotificationChannels\Infobip\Exceptions\CouldNotSendNotification;
 
 class InfobipChannel
 {
+    /**
+     * @var Dispatcher
+     */
+    public $events;
+
+    /**
+     * @var Infobip
+     */
     public $infobip;
 
     /**
      * InfobipChannel constructor.
      *
      * @param Infobip $infobip
+     * @param Dispatcher $events
      */
-    public function __construct(Infobip $infobip)
+    public function __construct(Infobip $infobip, Dispatcher $events)
     {
+        $this->events = $events;
         $this->infobip = $infobip;
     }
 
@@ -38,9 +49,10 @@ class InfobipChannel
             $response = $this->infobip->sendMessage($message, $recipient);
             $sentMessageInfo = $response->getMessages()[0];
 
-            $this->events->fire(new NotificationSent($notifiable, $notification, $sentMessageInfo));
+            $this->events->dispatch(new NotificationSent($notifiable, $notification, $sentMessageInfo));
         } catch (\Exception $exception) {
-            $this->events->fire(new NotificationFailed($notifiable, $notification, $exception));
+            //$this->events->dispatch(new NotificationFailed($notifiable, $notification, $exception));
+            dd($exception);
         }
     }
 

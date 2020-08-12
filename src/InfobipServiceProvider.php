@@ -3,6 +3,7 @@
 namespace NotificationChannels\Infobip;
 
 
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\ServiceProvider;
 
@@ -18,7 +19,10 @@ class InfobipServiceProvider extends ServiceProvider
         });
 
         Notification::extend('infobip', function ($app) {
-            return new InfobipChannel();
+            return new InfobipChannel(
+                $this->app->make(Infobip::class),
+                $this->app->make(Dispatcher::class)
+            );
         });
     }
 }

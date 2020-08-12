@@ -4,6 +4,9 @@ namespace NotificationChannels\Infobip;
 
 class InfobipConfig
 {
+    /**
+     * @var InfobipConfig
+     */
     public $config;
 
     /**
