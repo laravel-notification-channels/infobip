@@ -51,8 +51,7 @@ class InfobipChannel
 
             $this->events->dispatch(new NotificationSent($notifiable, $notification, $sentMessageInfo));
         } catch (\Exception $exception) {
-            //$this->events->dispatch(new NotificationFailed($notifiable, $notification, $exception));
-            dd($exception);
+            $this->events->dispatch(new NotificationFailed($notifiable, $notification, $exception));
         }
     }
 

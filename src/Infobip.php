@@ -75,7 +75,7 @@ class Infobip
         $request = new SMSTextualRequest();
         $request->setFrom($this->getFrom($message));
         $request->setTo($recipient);
-        $request->setText($message);
+        $request->setText($message->content);
 
         return $client->execute($request);
     }
@@ -98,7 +98,7 @@ class Infobip
         $requestMessage = new Message();
         $requestMessage->setFrom($this->getFrom($message));
         $requestMessage->setDestinations([$destination]);
-        $requestMessage->setText($message);
+        $requestMessage->setText($message->content);
         $requestMessage->setNotifyUrl($this->getNotifyUrl($message));
 
         $request = new SMSAdvancedTextualRequest();
@@ -120,7 +120,7 @@ class Infobip
             throw CouldNotSendNotification::missingFrom();
         }
 
-        return $from;
+        return $message->from ?: $this->config->config['from'];
     }
 
     /**
@@ -136,6 +136,6 @@ class Infobip
             throw CouldNotSendNotification::missingNotifyUrl();
         }
 
-        return $notifyUrl;
+        return $message->notify_url ?: $this->config->config['notify_url'];
     }
 }
