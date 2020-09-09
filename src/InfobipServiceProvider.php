@@ -2,7 +2,6 @@
 
 namespace NotificationChannels\Infobip;
 
-
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\ServiceProvider;
